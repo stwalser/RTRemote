@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Home: View {
     @StateObject var viewModel: ViewModel
-    
+        
     var body: some View {
         VStack {
             TitleView()
@@ -19,9 +19,9 @@ struct Home: View {
                 
                 Button {
                     if viewModel.webSocketConnected {
-                        viewModel.sendDisconnectWebSocket()
+                        viewModel.disconnectFromPlatform()
                     } else {
-                        viewModel.sendConnectWebSocket()
+                        viewModel.connectToPlatform()
                     }
                 } label: {
                     if viewModel.platformModeLocal == .HTTPManual {
@@ -44,7 +44,7 @@ struct Home: View {
                 
                 Spacer()
                 
-                Image(systemName: viewModel.platformReachabilityIcon)
+                Image(systemName: getConnectionIcon())
                 
                 Spacer()
             }
@@ -79,8 +79,21 @@ struct Home: View {
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
-    func sliderLimit() -> Double {
+    private func sliderLimit() -> Double {
         Double(viewModel.RPMRange)
+    }
+    
+    private func getConnectionIcon() -> String {
+        switch viewModel.platformModeLocal {
+        case .None:
+            return "line.diagonal"
+        case .Bluetooth:
+            return "line.diagonal"
+        case .HTTPManual:
+            return viewModel.platformReachableHTTP ? "wifi" : "wifi.slash"
+        case .HTTPAutomatic:
+            return viewModel.platformReachableHTTP ? "wifi" : "wifi.slash"
+        }
     }
 }
 

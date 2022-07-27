@@ -15,8 +15,12 @@
 		F897A6842625E6EC00F13965 /* MySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F897A6822625E6EC00F13965 /* MySlider.swift */; };
 		F898E67F261F8CCD007F0B68 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898E67E261F8CCD007F0B68 /* ViewModel.swift */; };
 		F898E680261F8CCD007F0B68 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898E67E261F8CCD007F0B68 /* ViewModel.swift */; };
+		F8D450A828911EB600AD9752 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450A728911EB600AD9752 /* Platform.swift */; };
+		F8D450A928911EB600AD9752 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450A728911EB600AD9752 /* Platform.swift */; };
 		F8D9760C2667F4AD0041109C /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D9760B2667F4AD0041109C /* TitleView.swift */; };
 		F8D9760D2667F4AD0041109C /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D9760B2667F4AD0041109C /* TitleView.swift */; };
+		F8FA133728908001002BCB16 /* HTTPCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA133628908001002BCB16 /* HTTPCommunication.swift */; };
+		F8FA133828908001002BCB16 /* HTTPCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA133628908001002BCB16 /* HTTPCommunication.swift */; };
 		F8FF6134261DA80400DC7785 /* RTRemoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FF610B261DA80200DC7785 /* RTRemoteApp.swift */; };
 		F8FF6135261DA80400DC7785 /* RTRemoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FF610B261DA80200DC7785 /* RTRemoteApp.swift */; };
 		F8FF6136261DA80400DC7785 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FF610C261DA80200DC7785 /* ContentView.swift */; };
@@ -47,7 +51,9 @@
 		F87E184A2664DF370015D677 /* PaddingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingModifier.swift; sourceTree = "<group>"; };
 		F897A6822625E6EC00F13965 /* MySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySlider.swift; sourceTree = "<group>"; };
 		F898E67E261F8CCD007F0B68 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		F8D450A728911EB600AD9752 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		F8D9760B2667F4AD0041109C /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		F8FA133628908001002BCB16 /* HTTPCommunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCommunication.swift; sourceTree = "<group>"; };
 		F8FF610B261DA80200DC7785 /* RTRemoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTRemoteApp.swift; sourceTree = "<group>"; };
 		F8FF610C261DA80200DC7785 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F8FF610D261DA80400DC7785 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,6 +117,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		F8FA133528907FE8002BCB16 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F8FA133628908001002BCB16 /* HTTPCommunication.swift */,
+				F8D450A728911EB600AD9752 /* Platform.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F8FF6105261DA80200DC7785 = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +139,7 @@
 		F8FF610A261DA80200DC7785 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				F8FA133528907FE8002BCB16 /* Model */,
 				F85A93D0262035C000A761C9 /* ViewModel */,
 				F85A93CF262035BB00A761C9 /* View */,
 				F8FF610B261DA80200DC7785 /* RTRemoteApp.swift */,
@@ -322,6 +338,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8D450A828911EB600AD9752 /* Platform.swift in Sources */,
+				F8FA133728908001002BCB16 /* HTTPCommunication.swift in Sources */,
 				F897A6832625E6EC00F13965 /* MySlider.swift in Sources */,
 				F8FF6136261DA80400DC7785 /* ContentView.swift in Sources */,
 				F898E67F261F8CCD007F0B68 /* ViewModel.swift in Sources */,
@@ -336,6 +354,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8D450A928911EB600AD9752 /* Platform.swift in Sources */,
+				F8FA133828908001002BCB16 /* HTTPCommunication.swift in Sources */,
 				F897A6842625E6EC00F13965 /* MySlider.swift in Sources */,
 				F8FF6137261DA80400DC7785 /* ContentView.swift in Sources */,
 				F898E680261F8CCD007F0B68 /* ViewModel.swift in Sources */,

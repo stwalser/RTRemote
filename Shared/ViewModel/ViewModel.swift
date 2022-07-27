@@ -8,11 +8,6 @@
 import Foundation
 import Combine
 
-fileprivate let platformHostname = "10.0.0.17:8080"
-fileprivate let modeURL = URL(string: "http://\(platformHostname)/mode")!
-fileprivate let connectURL = URL(string: "ws://\(platformHostname)/connect")!
-fileprivate let statusURL = URL(string: "http://\(platformHostname)/status")!
-
 /// This class is the connection between the view and the logic of the app. It contains the variables that can affect the view and functions which the view uses to access the model.
 class ViewModel: ObservableObject {
     @Published var numberOfSentMessages = 0
@@ -21,85 +16,62 @@ class ViewModel: ObservableObject {
     @Published var platformModeLocal = PlatformMode.None
     @Published var platformReachableHTTP = false
     @Published var platformReachableBluetooth = false
-    @Published var platformReachabilityIcon: String = "line.diagonal"
     @Published var webSocketConnected = false
     
     let RPMRange = 250
     
     private var sliderValueCancellable: (left: AnyCancellable?, right: AnyCancellable?)
     private var modeCancellable: AnyCancellable?
-    private var lastErrorCancellable: AnyCancellable?
-    private var webSocketTask: URLSessionWebSocketTask?
+    private var httpCommunication = HTTPCommunication()
     
-    private let jsonEncoder = JSONEncoder()
-    
-    private func readMessage () {
-        webSocketTask!.receive { [self] result in
-            switch (result) {
-            case .success(let message):
-                print(message)
-                readMessage()
-            case .failure(let error):
-                print("Error: \(error)")
-                sendDisconnectWebSocket()
+    /// This initilaizer subscribes to both slider value bindings. Every time the slider value changes, the updateInstructions function will be called.
+    init() {
+        sliderValueCancellable.left = $sliderValueLeft.sink { [self] in
+            if platformModeLocal == .HTTPManual {
+                sendTargetWebSocket(at: .left, $0)
             }
         }
-    }
         
-    func sendConnectWebSocket() {
-        webSocketTask = URLSession.shared.webSocketTask(with: connectURL)
+        sliderValueCancellable.right = $sliderValueRight.sink { [self] in
+            if platformModeLocal == .HTTPManual {
+                sendTargetWebSocket(at: .right, $0)
+            }
+        }
+        
+        modeCancellable = $platformModeLocal.sink { [self] in
+            changePlatformMode(to: $0)
+        }
+    }
+    
+    // MARK: - Actions
+    func connectToPlatform() {
+        httpCommunication.webSocketTask = URLSession.shared.webSocketTask(with: httpCommunication.connectURL)
         DispatchQueue.main.async { [self] in
             webSocketConnected = true
         }
-        readMessage()
-        webSocketTask!.resume()
+        setOneTimeReceiveHandler()
+        httpCommunication.webSocketTask!.resume()
     }
     
-    func sendDisconnectWebSocket() {
-        if let socket = webSocketTask {
+    func disconnectFromPlatform() {
+        if let socket = httpCommunication.webSocketTask {
             socket.cancel(with: .goingAway, reason: nil)
         }
-        webSocketConnected = false
-    }
-    
-    private func sendTargetWebSocket(at side: motorSide, _ value: Double) {
-        guard webSocketConnected && webSocketTask != nil else {
-            return
-        }
-        do {
-            let data = try jsonEncoder.encode(Instruction(rpm: abs(value), dir: value >= 0 ? .forward : .backward, side: side))
-            webSocketTask!.send(.data(data)) { error in
-                if let error = error {
-                    NSLog("Sending an Instruction to the platform failed. \(error)")
-                }
-            }
-        } catch {
-            print("Encoding an Instruction for target failed.")
+        httpCommunication.webSocketTask = nil
+        DispatchQueue.main.async { [self] in
+            webSocketConnected = false
         }
     }
     
-    private func sendModeHTTP(_ value: PlatformMode) {
-        if value != .HTTPManual {
-            sendDisconnectWebSocket()
+    private func changePlatformMode(to mode: PlatformMode) {
+        if mode != .HTTPManual {
+            disconnectFromPlatform()
         }
         
-        let dataString = value.rawValue
-        var request = URLRequest(url: modeURL)
-        
-        request.httpMethod = "PUT"
-        request.httpBody = dataString.data(using: .utf8)
-        request.setValue("text/plain; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        request.setValue("\(dataString.count)", forHTTPHeaderField: "Content-Length")
-        
-        let task = URLSession.shared.dataTask(with: request) { [self] _, urlRespone, _ in
-            parseResponseStatus(response: urlRespone as? HTTPURLResponse)
-            if value == .HTTPManual {
-                sendConnectWebSocket()
-            }
-        }
-        task.resume()
+        sendModeRequest(mode)
     }
     
+    // MARK: - HTTP helper functions
     private func parseResponseStatus(response: HTTPURLResponse?) {
         DispatchQueue.main.async { [self] in
             if let response = response {
@@ -111,78 +83,44 @@ class ViewModel: ObservableObject {
             } else {
                 platformReachableHTTP = false
             }
-            getConnectionIcon()
         }
     }
     
-    private func getConnectionIcon() {
-        switch platformModeLocal {
-        case .None:
-            platformReachabilityIcon = "line.diagonal"
-        case .Bluetooth:
-            platformReachabilityIcon = "line.diagonal"
-        case .HTTPManual:
-            platformReachabilityIcon = platformReachableHTTP ? "wifi" : "wifi.slash"
-        case .HTTPAutomatic:
-            platformReachabilityIcon = platformReachableHTTP ? "wifi" : "wifi.slash"
+    private func sendTargetWebSocket(at side: MotorSide, _ value: Double) {
+        guard webSocketConnected && httpCommunication.webSocketTask != nil else {
+            return
+        }
+        do {
+            httpCommunication.webSocketTask!.send(.data(try httpCommunication.encodeData(value, side))) { error in
+                if let error = error {
+                    NSLog("Sending an Instruction to the platform failed. \(error)")
+                }
+            }
+        } catch {
+            NSLog("Encoding an Instruction for target failed.")
         }
     }
     
-    /// This initilaizer subscribes to both slider value bindings. Every time the slider value changes, the updateInstructions function will be called.
-    init() {
-        sliderValueCancellable.left = $sliderValueLeft.sink { [self] value in
-            if platformModeLocal == .HTTPManual {
-                sendTargetWebSocket(at: .left, value)
+    private func setOneTimeReceiveHandler () {
+        httpCommunication.webSocketTask!.receive { [self] result in
+            switch (result) {
+            case .success(_):
+                setOneTimeReceiveHandler()
+            case .failure(let error):
+                NSLog("Error: \(error)")
+                disconnectFromPlatform()
             }
         }
-        
-        sliderValueCancellable.right = $sliderValueRight.sink { [self] value in
-            if platformModeLocal == .HTTPManual {
-                sendTargetWebSocket(at: .right, value)
-            }
-        }
-        
-        modeCancellable = $platformModeLocal.sink(receiveValue: { [self] value in
-            sendModeHTTP(value)
-        })
     }
-}
-
-/// Two different motors
-enum motorSide: Int, Codable {
-    case left
-    case right
-}
-
-/// The direction the motor should turn in
-enum motorDirection: Int, Codable {
-    case forward
-    case backward
-}
-
-/// The mode in which the platform is in
-enum PlatformMode: String, Codable {
-    case None
-    case Bluetooth
-    case HTTPManual
-    case HTTPAutomatic
-}
-
-/// A struct representing a manual driving instruction
-struct Instruction: Codable {
-    var rpm: Double
-    var dir: motorDirection
-    var side: motorSide
-}
-
-/// A struct representing the infromation the platform can send
-struct Status: Codable {
-    var faultLeft: Int
-    var faultRight: Int
-    var currentTargetLeft: Instruction?
-    var currentTargetRight: Instruction?
-    var currentInstructionLeft: Instruction
-    var currentInstructionRight: Instruction
-    var mode: PlatformMode
-    var targetMessageID: Int
+    
+    private func sendModeRequest(_ value: PlatformMode) {
+        let task = URLSession.shared.dataTask(with: httpCommunication.request(value)) { [self] _, urlRespone, _ in
+            parseResponseStatus(response: urlRespone as? HTTPURLResponse)
+            
+            if value == .HTTPManual {
+                connectToPlatform()
+            }
+        }
+        task.resume()
+    }
 }
