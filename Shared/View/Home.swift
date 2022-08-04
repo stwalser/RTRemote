@@ -9,91 +9,69 @@ import SwiftUI
 
 struct Home: View {
     @StateObject var viewModel: ViewModel
-        
+    
     var body: some View {
-        VStack {
-            TitleView()
-            
-            HStack {
-                Spacer()
-                
-                Button {
-                    if viewModel.webSocketConnected {
-                        viewModel.disconnectFromPlatform()
-                    } else {
-                        viewModel.connectToPlatform()
-                    }
-                } label: {
-                    if viewModel.platformModeLocal == .HTTPManual {
-                        if viewModel.webSocketConnected {
-                            Text("Disconnect")
-                        } else {
-                            Text("Connect")
-                        }
-                    }
-                }
-
-                Spacer()
-                
-                Picker(selection: $viewModel.platformModeLocal, label: Text("Platform Mode")) {
-                    Text("Choose a mode").tag(PlatformMode.None)
-                    Text("Bluetooth").tag(PlatformMode.Bluetooth)
-                    Text("HTTP Manual").tag(PlatformMode.HTTPManual)
-                    Text("HTTP Automatic").tag(PlatformMode.HTTPAutomatic)
-                }
-                
-                Spacer()
-                
-                Image(systemName: getConnectionIcon())
-                
-                Spacer()
-            }
-            
-            
-            Divider().modifier(PaddingModifier())
-            
-            if viewModel.platformModeLocal == .HTTPManual || viewModel.platformModeLocal == .Bluetooth {
-                HStack {
-                    VStack {
-                        Text("Left Track").fontWeight(.bold)
-                        Text("\(Int(viewModel.sliderValueLeft)) RPM")
-                    }
-                    Spacer()
-                    VStack {
-                        Text("Right Track").fontWeight(.bold)
-                        Text("\(Int(viewModel.sliderValueRight)) RPM")
-                    }
-                }.padding()
-                
-                HStack {
-                    MySlider(sliderValue: $viewModel.sliderValueLeft, limit: sliderLimit())
-                        .padding()
+        NavigationView {
+            List {
+                Section("Controls") {
+                    NavigationLink {
+                        ManualSteering().environmentObject(viewModel)
+                    } label: {
+                        Text("Manual HTTP")
+                    }.disabled(!viewModel.platformReachableHTTP)
                     
-                    MySlider(sliderValue: $viewModel.sliderValueRight, limit: sliderLimit())
-                        .padding()
-                }.padding(.top).padding(.bottom)
-            }
-            
-            Spacer()
-            
-        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-    
-    private func sliderLimit() -> Double {
-        Double(viewModel.RPMRange)
-    }
-    
-    private func getConnectionIcon() -> String {
-        switch viewModel.platformModeLocal {
-        case .None:
-            return "line.diagonal"
-        case .Bluetooth:
-            return "line.diagonal"
-        case .HTTPManual:
-            return viewModel.platformReachableHTTP ? "wifi" : "wifi.slash"
-        case .HTTPAutomatic:
-            return viewModel.platformReachableHTTP ? "wifi" : "wifi.slash"
+                    NavigationLink {
+                        ManualSteering().environmentObject(viewModel)
+                    } label: {
+                        Text("Manual Bluetooth")
+                    }.disabled(true)
+                    
+                    NavigationLink {
+                        AutomaticSteering().environmentObject(viewModel)
+                    } label: {
+                        Text("Automatic HTTP")
+                    }.disabled(!viewModel.platformReachableHTTP)
+                }
+                
+                Section("Platform Status") {
+                    HStack {
+                        Text("Platform Reachable HTTP")
+                        Spacer()
+                        Image(systemName: "dot.square").foregroundColor(reachabilityColor())
+                    }
+                    
+                    HStack {
+                        Text("Fault Pin Left")
+                        Spacer()
+                        Image(systemName: "dot.square").foregroundColor(faultPinImageColor())
+                    }.foregroundColor(reachabilityTextColor())
+                    
+                    HStack {
+                        Text("Fault Pin Right")
+                        Spacer()
+                        Image(systemName: "dot.square").foregroundColor(faultPinImageColor())
+                    }.foregroundColor(reachabilityTextColor())
+                }
+            }.navigationTitle(Text("RTPlatform Remote"))
         }
+    }
+    
+    func faultPinImageColor() -> Color {
+        if viewModel.platformReachableHTTP {
+            if let status = viewModel.platformStatus {
+                return status.faultLeft == 0 ? .green : .red
+            }
+            return .gray
+        }
+        return .gray
+    }
+    
+    func reachabilityColor() -> Color {
+        viewModel.platformReachableHTTP ? .green : .red
+    }
+    
+    func reachabilityTextColor() -> Color {
+        viewModel.platformReachableHTTP ? .black : .gray
     }
 }
 

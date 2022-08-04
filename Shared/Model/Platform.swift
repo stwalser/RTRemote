@@ -43,5 +43,4 @@ struct Status: Codable {
     var currentInstructionLeft: Instruction
     var currentInstructionRight: Instruction
     var mode: PlatformMode
-    var targetMessageID: Int
 }

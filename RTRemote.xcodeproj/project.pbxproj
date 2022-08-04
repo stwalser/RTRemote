@@ -7,18 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F82F72D6289A912F00BA3C96 /* AutoProgramModification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82F72D5289A912F00BA3C96 /* AutoProgramModification.swift */; };
+		F82F72D7289A912F00BA3C96 /* AutoProgramModification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82F72D5289A912F00BA3C96 /* AutoProgramModification.swift */; };
 		F85A93D2262035E800A761C9 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85A93D1262035E800A761C9 /* Home.swift */; };
 		F85A93D3262035E800A761C9 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85A93D1262035E800A761C9 /* Home.swift */; };
-		F87E184B2664DF370015D677 /* PaddingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87E184A2664DF370015D677 /* PaddingModifier.swift */; };
-		F87E184C2664DF370015D677 /* PaddingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87E184A2664DF370015D677 /* PaddingModifier.swift */; };
 		F897A6832625E6EC00F13965 /* MySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F897A6822625E6EC00F13965 /* MySlider.swift */; };
 		F897A6842625E6EC00F13965 /* MySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F897A6822625E6EC00F13965 /* MySlider.swift */; };
 		F898E67F261F8CCD007F0B68 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898E67E261F8CCD007F0B68 /* ViewModel.swift */; };
 		F898E680261F8CCD007F0B68 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898E67E261F8CCD007F0B68 /* ViewModel.swift */; };
+		F8C508CF289BBA19001F3037 /* AutomaticSteering.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C508CE289BBA19001F3037 /* AutomaticSteering.swift */; };
+		F8C508D0289BBA19001F3037 /* AutomaticSteering.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C508CE289BBA19001F3037 /* AutomaticSteering.swift */; };
+		F8C72AB0289AC749008D5690 /* ButtonOrProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C72AAF289AC749008D5690 /* ButtonOrProgress.swift */; };
+		F8C72AB1289AC749008D5690 /* ButtonOrProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C72AAF289AC749008D5690 /* ButtonOrProgress.swift */; };
+		F8C72AB3289AE27C008D5690 /* ManualSteering.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C72AB2289AE27C008D5690 /* ManualSteering.swift */; };
+		F8C72AB4289AE27C008D5690 /* ManualSteering.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C72AB2289AE27C008D5690 /* ManualSteering.swift */; };
+		F8C72AB8289B0AA4008D5690 /* PaddingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C72AB7289B0AA4008D5690 /* PaddingModifier.swift */; };
+		F8C72AB9289B0AA4008D5690 /* PaddingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C72AB7289B0AA4008D5690 /* PaddingModifier.swift */; };
 		F8D450A828911EB600AD9752 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450A728911EB600AD9752 /* Platform.swift */; };
 		F8D450A928911EB600AD9752 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450A728911EB600AD9752 /* Platform.swift */; };
-		F8D9760C2667F4AD0041109C /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D9760B2667F4AD0041109C /* TitleView.swift */; };
-		F8D9760D2667F4AD0041109C /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D9760B2667F4AD0041109C /* TitleView.swift */; };
+		F8D450AB2891373500AD9752 /* AutomaticProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450AA2891373500AD9752 /* AutomaticProgram.swift */; };
+		F8D450AC2891373500AD9752 /* AutomaticProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450AA2891373500AD9752 /* AutomaticProgram.swift */; };
+		F8D450AE2891697300AD9752 /* AutomaticProgramButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450AD2891697300AD9752 /* AutomaticProgramButton.swift */; };
+		F8D450AF2891697300AD9752 /* AutomaticProgramButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450AD2891697300AD9752 /* AutomaticProgramButton.swift */; };
 		F8FA133728908001002BCB16 /* HTTPCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA133628908001002BCB16 /* HTTPCommunication.swift */; };
 		F8FA133828908001002BCB16 /* HTTPCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA133628908001002BCB16 /* HTTPCommunication.swift */; };
 		F8FF6134261DA80400DC7785 /* RTRemoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FF610B261DA80200DC7785 /* RTRemoteApp.swift */; };
@@ -47,12 +57,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F82F72D5289A912F00BA3C96 /* AutoProgramModification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoProgramModification.swift; sourceTree = "<group>"; };
 		F85A93D1262035E800A761C9 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		F87E184A2664DF370015D677 /* PaddingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingModifier.swift; sourceTree = "<group>"; };
 		F897A6822625E6EC00F13965 /* MySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySlider.swift; sourceTree = "<group>"; };
 		F898E67E261F8CCD007F0B68 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		F8C508CE289BBA19001F3037 /* AutomaticSteering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticSteering.swift; sourceTree = "<group>"; };
+		F8C72AAF289AC749008D5690 /* ButtonOrProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOrProgress.swift; sourceTree = "<group>"; };
+		F8C72AB2289AE27C008D5690 /* ManualSteering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualSteering.swift; sourceTree = "<group>"; };
+		F8C72AB7289B0AA4008D5690 /* PaddingModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingModifier.swift; sourceTree = "<group>"; };
 		F8D450A728911EB600AD9752 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
-		F8D9760B2667F4AD0041109C /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		F8D450AA2891373500AD9752 /* AutomaticProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticProgram.swift; sourceTree = "<group>"; };
+		F8D450AD2891697300AD9752 /* AutomaticProgramButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticProgramButton.swift; sourceTree = "<group>"; };
 		F8FA133628908001002BCB16 /* HTTPCommunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCommunication.swift; sourceTree = "<group>"; };
 		F8FF610B261DA80200DC7785 /* RTRemoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTRemoteApp.swift; sourceTree = "<group>"; };
 		F8FF610C261DA80200DC7785 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,10 +116,10 @@
 		F85A93CF262035BB00A761C9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F8C72AB6289B0A3A008D5690 /* Automatic */,
+				F8C72AB5289B0A26008D5690 /* Manual */,
 				F85A93D1262035E800A761C9 /* Home.swift */,
-				F897A6822625E6EC00F13965 /* MySlider.swift */,
-				F87E184A2664DF370015D677 /* PaddingModifier.swift */,
-				F8D9760B2667F4AD0041109C /* TitleView.swift */,
+				F8C72AB7289B0AA4008D5690 /* PaddingModifier.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -117,11 +132,32 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		F8C72AB5289B0A26008D5690 /* Manual */ = {
+			isa = PBXGroup;
+			children = (
+				F897A6822625E6EC00F13965 /* MySlider.swift */,
+				F8C72AB2289AE27C008D5690 /* ManualSteering.swift */,
+			);
+			path = Manual;
+			sourceTree = "<group>";
+		};
+		F8C72AB6289B0A3A008D5690 /* Automatic */ = {
+			isa = PBXGroup;
+			children = (
+				F8D450AD2891697300AD9752 /* AutomaticProgramButton.swift */,
+				F82F72D5289A912F00BA3C96 /* AutoProgramModification.swift */,
+				F8C72AAF289AC749008D5690 /* ButtonOrProgress.swift */,
+				F8C508CE289BBA19001F3037 /* AutomaticSteering.swift */,
+			);
+			path = Automatic;
+			sourceTree = "<group>";
+		};
 		F8FA133528907FE8002BCB16 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				F8FA133628908001002BCB16 /* HTTPCommunication.swift */,
 				F8D450A728911EB600AD9752 /* Platform.swift */,
+				F8D450AA2891373500AD9752 /* AutomaticProgram.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -338,15 +374,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8D450AE2891697300AD9752 /* AutomaticProgramButton.swift in Sources */,
+				F8D450AB2891373500AD9752 /* AutomaticProgram.swift in Sources */,
 				F8D450A828911EB600AD9752 /* Platform.swift in Sources */,
+				F8C508CF289BBA19001F3037 /* AutomaticSteering.swift in Sources */,
+				F82F72D6289A912F00BA3C96 /* AutoProgramModification.swift in Sources */,
+				F8C72AB8289B0AA4008D5690 /* PaddingModifier.swift in Sources */,
 				F8FA133728908001002BCB16 /* HTTPCommunication.swift in Sources */,
+				F8C72AB0289AC749008D5690 /* ButtonOrProgress.swift in Sources */,
 				F897A6832625E6EC00F13965 /* MySlider.swift in Sources */,
 				F8FF6136261DA80400DC7785 /* ContentView.swift in Sources */,
 				F898E67F261F8CCD007F0B68 /* ViewModel.swift in Sources */,
 				F85A93D2262035E800A761C9 /* Home.swift in Sources */,
 				F8FF6134261DA80400DC7785 /* RTRemoteApp.swift in Sources */,
-				F8D9760C2667F4AD0041109C /* TitleView.swift in Sources */,
-				F87E184B2664DF370015D677 /* PaddingModifier.swift in Sources */,
+				F8C72AB3289AE27C008D5690 /* ManualSteering.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,15 +395,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8D450AF2891697300AD9752 /* AutomaticProgramButton.swift in Sources */,
+				F8D450AC2891373500AD9752 /* AutomaticProgram.swift in Sources */,
 				F8D450A928911EB600AD9752 /* Platform.swift in Sources */,
+				F8C508D0289BBA19001F3037 /* AutomaticSteering.swift in Sources */,
+				F82F72D7289A912F00BA3C96 /* AutoProgramModification.swift in Sources */,
+				F8C72AB9289B0AA4008D5690 /* PaddingModifier.swift in Sources */,
 				F8FA133828908001002BCB16 /* HTTPCommunication.swift in Sources */,
+				F8C72AB1289AC749008D5690 /* ButtonOrProgress.swift in Sources */,
 				F897A6842625E6EC00F13965 /* MySlider.swift in Sources */,
 				F8FF6137261DA80400DC7785 /* ContentView.swift in Sources */,
 				F898E680261F8CCD007F0B68 /* ViewModel.swift in Sources */,
 				F85A93D3262035E800A761C9 /* Home.swift in Sources */,
 				F8FF6135261DA80400DC7785 /* RTRemoteApp.swift in Sources */,
-				F8D9760D2667F4AD0041109C /* TitleView.swift in Sources */,
-				F87E184C2664DF370015D677 /* PaddingModifier.swift in Sources */,
+				F8C72AB4289AE27C008D5690 /* ManualSteering.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,7 +494,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -505,7 +551,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -526,7 +572,7 @@
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -550,7 +596,7 @@
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -584,6 +630,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stefanwalser.RTRemote;
 				PRODUCT_NAME = RTRemote;
 				SDKROOT = macosx;
@@ -610,6 +657,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stefanwalser.RTRemote;
 				PRODUCT_NAME = RTRemote;
 				SDKROOT = macosx;

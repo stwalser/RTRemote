@@ -10,13 +10,24 @@ import Combine
 
 /// This class is the connection between the view and the logic of the app. It contains the variables that can affect the view and functions which the view uses to access the model.
 class ViewModel: ObservableObject {
-    @Published var numberOfSentMessages = 0
+    // Manual steering
     @Published var sliderValueLeft = 0.0
     @Published var sliderValueRight = 0.0
+    
+    // HTTP variables
     @Published var platformModeLocal = PlatformMode.None
     @Published var platformReachableHTTP = false
     @Published var platformReachableBluetooth = false
     @Published var webSocketConnected = false
+    
+    // Automatic Program
+    @Published var automaticPrograms = [AutomaticProgram](arrayLiteral: AutomaticProgram(name: "Short Time", stringContent: "[{\"type\":\"straightTime\",\"duration\":1.0,\"direction\":0},{\"type\":\"straightTime\",\"duration\":2.0,\"direction\":1}]"), AutomaticProgram(name: "Short Time 2", stringContent: "[{\"type\":\"straightTime\",\"duration\":1.0,\"direction\":0},{\"type\":\"straightTime\",\"duration\":2.0,\"direction\":1}]"))
+    @Published var automaticProgramRunProgress = 0.0
+    @Published var automaticProgramRunning: AutomaticProgram?
+    
+    @Published var platformStatus: Status?
+    private var platformStatusTimer: Timer?
+    private let intervalTime: TimeInterval = 4
     
     let RPMRange = 250
     
@@ -39,36 +50,36 @@ class ViewModel: ObservableObject {
         }
         
         modeCancellable = $platformModeLocal.sink { [self] in
-            changePlatformMode(to: $0)
+            sendModeRequest($0)
         }
+        
+        createTimer()
     }
     
     // MARK: - Actions
-    func connectToPlatform() {
-        httpCommunication.webSocketTask = URLSession.shared.webSocketTask(with: httpCommunication.connectURL)
-        DispatchQueue.main.async { [self] in
-            webSocketConnected = true
-        }
-        setOneTimeReceiveHandler()
-        httpCommunication.webSocketTask!.resume()
+    func connectToPlatformAutomatic() {
+        connectToPlatform(with: httpCommunication.startProgramURL, using: oneTimeReceiveHandlerProgress)
     }
     
     func disconnectFromPlatform() {
         if let socket = httpCommunication.webSocketTask {
             socket.cancel(with: .goingAway, reason: nil)
         }
+        
         httpCommunication.webSocketTask = nil
+        
         DispatchQueue.main.async { [self] in
+            automaticProgramRunning = nil
+            automaticProgramRunProgress = 0.0
             webSocketConnected = false
         }
     }
     
-    private func changePlatformMode(to mode: PlatformMode) {
-        if mode != .HTTPManual {
-            disconnectFromPlatform()
+    func uploadAutomaticProgram(called program: AutomaticProgram) {
+        let task = URLSession.shared.dataTask(with: httpCommunication.requestJSON(to: httpCommunication.uploadProgramURL, program.stringContent)) { [self] _, urlRespone, _ in
+            parseResponseStatus(response: urlRespone as? HTTPURLResponse)
         }
-        
-        sendModeRequest(mode)
+        task.resume()
     }
     
     // MARK: - HTTP helper functions
@@ -101,11 +112,34 @@ class ViewModel: ObservableObject {
         }
     }
     
-    private func setOneTimeReceiveHandler () {
+    private func oneTimeReceiveHandlerNothing() {
         httpCommunication.webSocketTask!.receive { [self] result in
             switch (result) {
             case .success(_):
-                setOneTimeReceiveHandler()
+                oneTimeReceiveHandlerNothing()
+            case .failure(let error):
+                NSLog("Error: \(error)")
+                disconnectFromPlatform()
+            }
+        }
+    }
+    
+    private func oneTimeReceiveHandlerProgress() {
+        httpCommunication.webSocketTask!.receive { [self] result in
+            switch (result) {
+            case .success(let message):
+                print(message)
+                switch message {
+                case .string(let string):
+                    DispatchQueue.main.async { [self] in
+                        automaticProgramRunProgress = Double(string) ?? 0.0
+                        print(automaticProgramRunProgress)
+                    }
+                default:
+                    disconnectFromPlatform()
+                }
+                
+                oneTimeReceiveHandlerProgress()
             case .failure(let error):
                 NSLog("Error: \(error)")
                 disconnectFromPlatform()
@@ -114,13 +148,48 @@ class ViewModel: ObservableObject {
     }
     
     private func sendModeRequest(_ value: PlatformMode) {
-        let task = URLSession.shared.dataTask(with: httpCommunication.request(value)) { [self] _, urlRespone, _ in
+        let task = URLSession.shared.dataTask(with: httpCommunication.requestPlain(to: httpCommunication.modeURL, value)) { [self] _, urlRespone, _ in
             parseResponseStatus(response: urlRespone as? HTTPURLResponse)
             
             if value == .HTTPManual {
-                connectToPlatform()
+                connectToPlatform(with: httpCommunication.connectURL, using: oneTimeReceiveHandlerNothing)
+            } else {
+                disconnectFromPlatform()
             }
         }
         task.resume()
+    }
+    
+    private func connectToPlatform(with url: URL, using receiveHandler: () -> Void) {
+        httpCommunication.webSocketTask = URLSession.shared.webSocketTask(with: url)
+        
+        DispatchQueue.main.async { [self] in
+            webSocketConnected = true
+        }
+        
+        receiveHandler()
+        httpCommunication.webSocketTask!.resume()
+    }
+    
+    private func getPlatformStatus() {
+        let task = URLSession.shared.dataTask(with: httpCommunication.statusURL) { [self] data, response, error in
+            let urlresponse = response as? HTTPURLResponse
+            parseResponseStatus(response: urlresponse)
+            
+            if let res = urlresponse {
+                if res.statusCode == 200 {
+                    DispatchQueue.main.async { [self] in
+                        platformStatus = try! httpCommunication.decodeStatus(data: data!)
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    private func createTimer() {
+        platformStatusTimer = Timer.scheduledTimer(withTimeInterval: intervalTime, repeats: true) { [self] timer in
+             getPlatformStatus()
+        }
     }
 }
