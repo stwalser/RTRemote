@@ -8,15 +8,26 @@
 import SwiftUI
 
 struct AutomaticSteering: View {
-    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
+    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: Int(UIScreen.main.bounds.width) / 160)
 
     @EnvironmentObject var viewModel: ViewModel
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.creationDate)]) var automaticPrograms: FetchedResults<AutomaticProgram>
     
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns) {
-                ForEach(viewModel.automaticPrograms) {program in
+                ForEach(automaticPrograms) {program in
                     AutomaticProgramButton(program: program, buttonColor: .red).environmentObject(viewModel)
+                        .contextMenu {
+                            Button {
+                                deleteAutomaticProgram(program)
+                            } label: {
+                                Label("Löschen", systemImage: "trash")
+                            }
+
+                        }
                 }
             }
             
@@ -29,6 +40,29 @@ struct AutomaticSteering: View {
         .onDisappear {
             viewModel.platformModeLocal = .None
         }
+        .toolbar {
+            Button {
+                addNewAutomaticProgram()
+            } label: {
+                Image(systemName: "plus")
+            }
+
+        }
+    }
+    
+    func addNewAutomaticProgram() {
+        let program = AutomaticProgram(context: managedObjectContext)
+        program.name = "Program"
+        program.creationDate = .now
+        program.stringContent = "Test"
+        program.id = UUID()
+        PersistenceController.shared.save()
+    }
+    
+    func deleteAutomaticProgram(_ program: AutomaticProgram) {
+        print(program)
+        managedObjectContext.delete(program)
+        PersistenceController.shared.save()
     }
 }
 

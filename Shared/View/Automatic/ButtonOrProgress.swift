@@ -57,11 +57,3 @@ struct ButtonOrProgress: View {
         }
     }
 }
-
-struct ButtonOrProgress_Previews: PreviewProvider {
-    static let model = ViewModel()
-    
-    static var previews: some View {
-        ButtonOrProgress(program: model.automaticPrograms[0]).environmentObject(model)
-    }
-}

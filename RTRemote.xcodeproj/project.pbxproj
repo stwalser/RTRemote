@@ -21,14 +21,14 @@
 		F8C72AB1289AC749008D5690 /* ButtonOrProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C72AAF289AC749008D5690 /* ButtonOrProgress.swift */; };
 		F8C72AB3289AE27C008D5690 /* ManualSteering.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C72AB2289AE27C008D5690 /* ManualSteering.swift */; };
 		F8C72AB4289AE27C008D5690 /* ManualSteering.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C72AB2289AE27C008D5690 /* ManualSteering.swift */; };
-		F8C72AB8289B0AA4008D5690 /* PaddingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C72AB7289B0AA4008D5690 /* PaddingModifier.swift */; };
-		F8C72AB9289B0AA4008D5690 /* PaddingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C72AB7289B0AA4008D5690 /* PaddingModifier.swift */; };
 		F8D450A828911EB600AD9752 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450A728911EB600AD9752 /* Platform.swift */; };
 		F8D450A928911EB600AD9752 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450A728911EB600AD9752 /* Platform.swift */; };
-		F8D450AB2891373500AD9752 /* AutomaticProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450AA2891373500AD9752 /* AutomaticProgram.swift */; };
-		F8D450AC2891373500AD9752 /* AutomaticProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450AA2891373500AD9752 /* AutomaticProgram.swift */; };
 		F8D450AE2891697300AD9752 /* AutomaticProgramButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450AD2891697300AD9752 /* AutomaticProgramButton.swift */; };
 		F8D450AF2891697300AD9752 /* AutomaticProgramButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D450AD2891697300AD9752 /* AutomaticProgramButton.swift */; };
+		F8D6B88728C3A2B500F65A21 /* StorageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F8D6B88528C3A2B500F65A21 /* StorageModel.xcdatamodeld */; };
+		F8D6B88828C3A2B500F65A21 /* StorageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F8D6B88528C3A2B500F65A21 /* StorageModel.xcdatamodeld */; };
+		F8D6B88B28C3A3E100F65A21 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D6B88A28C3A3E100F65A21 /* PersistenceController.swift */; };
+		F8D6B88C28C3A3E100F65A21 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D6B88A28C3A3E100F65A21 /* PersistenceController.swift */; };
 		F8FA133728908001002BCB16 /* HTTPCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA133628908001002BCB16 /* HTTPCommunication.swift */; };
 		F8FA133828908001002BCB16 /* HTTPCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA133628908001002BCB16 /* HTTPCommunication.swift */; };
 		F8FF6134261DA80400DC7785 /* RTRemoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FF610B261DA80200DC7785 /* RTRemoteApp.swift */; };
@@ -64,10 +64,10 @@
 		F8C508CE289BBA19001F3037 /* AutomaticSteering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticSteering.swift; sourceTree = "<group>"; };
 		F8C72AAF289AC749008D5690 /* ButtonOrProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOrProgress.swift; sourceTree = "<group>"; };
 		F8C72AB2289AE27C008D5690 /* ManualSteering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualSteering.swift; sourceTree = "<group>"; };
-		F8C72AB7289B0AA4008D5690 /* PaddingModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingModifier.swift; sourceTree = "<group>"; };
 		F8D450A728911EB600AD9752 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
-		F8D450AA2891373500AD9752 /* AutomaticProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticProgram.swift; sourceTree = "<group>"; };
 		F8D450AD2891697300AD9752 /* AutomaticProgramButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticProgramButton.swift; sourceTree = "<group>"; };
+		F8D6B88628C3A2B500F65A21 /* AutomaticProgramModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AutomaticProgramModel.xcdatamodel; sourceTree = "<group>"; };
+		F8D6B88A28C3A3E100F65A21 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		F8FA133628908001002BCB16 /* HTTPCommunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCommunication.swift; sourceTree = "<group>"; };
 		F8FF610B261DA80200DC7785 /* RTRemoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTRemoteApp.swift; sourceTree = "<group>"; };
 		F8FF610C261DA80200DC7785 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,7 +119,6 @@
 				F8C72AB6289B0A3A008D5690 /* Automatic */,
 				F8C72AB5289B0A26008D5690 /* Manual */,
 				F85A93D1262035E800A761C9 /* Home.swift */,
-				F8C72AB7289B0AA4008D5690 /* PaddingModifier.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -152,12 +151,19 @@
 			path = Automatic;
 			sourceTree = "<group>";
 		};
+		F8D6B88928C3A3C800F65A21 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F8D6B88A28C3A3E100F65A21 /* PersistenceController.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		F8FA133528907FE8002BCB16 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				F8FA133628908001002BCB16 /* HTTPCommunication.swift */,
 				F8D450A728911EB600AD9752 /* Platform.swift */,
-				F8D450AA2891373500AD9752 /* AutomaticProgram.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,12 +181,14 @@
 		F8FF610A261DA80200DC7785 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				F8D6B88928C3A3C800F65A21 /* Service */,
 				F8FA133528907FE8002BCB16 /* Model */,
 				F85A93D0262035C000A761C9 /* ViewModel */,
 				F85A93CF262035BB00A761C9 /* View */,
 				F8FF610B261DA80200DC7785 /* RTRemoteApp.swift */,
 				F8FF610C261DA80200DC7785 /* ContentView.swift */,
 				F8FF610D261DA80400DC7785 /* Assets.xcassets */,
+				F8D6B88528C3A2B500F65A21 /* StorageModel.xcdatamodeld */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -374,12 +382,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8D6B88B28C3A3E100F65A21 /* PersistenceController.swift in Sources */,
 				F8D450AE2891697300AD9752 /* AutomaticProgramButton.swift in Sources */,
-				F8D450AB2891373500AD9752 /* AutomaticProgram.swift in Sources */,
 				F8D450A828911EB600AD9752 /* Platform.swift in Sources */,
 				F8C508CF289BBA19001F3037 /* AutomaticSteering.swift in Sources */,
 				F82F72D6289A912F00BA3C96 /* AutoProgramModification.swift in Sources */,
-				F8C72AB8289B0AA4008D5690 /* PaddingModifier.swift in Sources */,
+				F8D6B88728C3A2B500F65A21 /* StorageModel.xcdatamodeld in Sources */,
 				F8FA133728908001002BCB16 /* HTTPCommunication.swift in Sources */,
 				F8C72AB0289AC749008D5690 /* ButtonOrProgress.swift in Sources */,
 				F897A6832625E6EC00F13965 /* MySlider.swift in Sources */,
@@ -395,12 +403,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8D6B88C28C3A3E100F65A21 /* PersistenceController.swift in Sources */,
 				F8D450AF2891697300AD9752 /* AutomaticProgramButton.swift in Sources */,
-				F8D450AC2891373500AD9752 /* AutomaticProgram.swift in Sources */,
 				F8D450A928911EB600AD9752 /* Platform.swift in Sources */,
 				F8C508D0289BBA19001F3037 /* AutomaticSteering.swift in Sources */,
 				F82F72D7289A912F00BA3C96 /* AutoProgramModification.swift in Sources */,
-				F8C72AB9289B0AA4008D5690 /* PaddingModifier.swift in Sources */,
+				F8D6B88828C3A2B500F65A21 /* StorageModel.xcdatamodeld in Sources */,
 				F8FA133828908001002BCB16 /* HTTPCommunication.swift in Sources */,
 				F8C72AB1289AC749008D5690 /* ButtonOrProgress.swift in Sources */,
 				F897A6842625E6EC00F13965 /* MySlider.swift in Sources */,
@@ -805,6 +813,19 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F8D6B88528C3A2B500F65A21 /* StorageModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F8D6B88628C3A2B500F65A21 /* AutomaticProgramModel.xcdatamodel */,
+			);
+			currentVersion = F8D6B88628C3A2B500F65A21 /* AutomaticProgramModel.xcdatamodel */;
+			path = StorageModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F8FF6106261DA80200DC7785 /* Project object */;
 }

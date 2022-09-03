@@ -6,20 +6,33 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct RTRemoteApp: App {
+    
+    @Environment(\.scenePhase) var scenePhase
+    
+    let persistenceController = PersistenceController.shared
+    
     var body: some Scene {
         // Hiding Titlebar for only macOS
-        #if os(iOS)
+#if os(iOS)
         WindowGroup {
-            ContentView()
+            ContentView().environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
-        #else
+        .onChange(of: scenePhase) { _ in
+            persistenceController.save()
+        }
+#else
         WindowGroup {
-            ContentView()
-        }.windowStyle(HiddenTitleBarWindowStyle())
-        #endif
+            ContentView().environment(\.managedObjectContext, persistenceController.container.viewContext)
+        }
+        .windowStyle(HiddenTitleBarWindowStyle())
+        .onChange(of: scenePhase) { _ in
+            persistenceController.save()
+        }
+#endif
     }
 }
 

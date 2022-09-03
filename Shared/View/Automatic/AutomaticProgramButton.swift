@@ -35,7 +35,7 @@ struct AutomaticProgramButton: View {
                 
                 Spacer()
                 
-                Text(program.name)
+                Text(program.name ?? "Unknown")
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
                     .padding(10)
@@ -57,11 +57,5 @@ struct AutomaticProgramButton: View {
         } else {
             return 1.0
         }
-    }
-}
-
-struct AutomaticProgramButton_Previews: PreviewProvider {
-    static var previews: some View {
-        AutomaticProgramButton(program: ViewModel().automaticPrograms[0], buttonColor: .red).environmentObject(ViewModel())
     }
 }
