@@ -24,6 +24,7 @@ class ViewModel: ObservableObject {
     // @Published var automaticPrograms = [AutomaticProgram](arrayLiteral: AutomaticProgram(creationDate: .distantPast, name: "Short Time", stringContent: "[{\"type\":\"straightTime\",\"duration\":1.0,\"direction\":0},{\"type\":\"straightTime\",\"duration\":2.0,\"direction\":1}]"), AutomaticProgram(creationDate: .now, name: "Short Time 2", stringContent: "[{\"type\":\"straightTime\",\"duration\":1.0,\"direction\":0},{\"type\":\"straightTime\",\"duration\":2.0,\"direction\":1}]"))
     @Published var automaticProgramRunProgress = 0.0
     @Published var automaticProgramRunning: AutomaticProgram?
+    @Published var highLevelInstructions = [HighLevelInstruction]()
     
     @Published var platformStatus: Status?
     private var platformStatusTimer: Timer?

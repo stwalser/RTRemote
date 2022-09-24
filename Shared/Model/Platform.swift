@@ -34,7 +34,7 @@ struct Instruction: Codable {
     var side: MotorSide
 }
 
-/// A struct representing the infromation the platform can send
+/// A struct representing the information the platform can send
 struct Status: Codable {
     var faultLeft: Int
     var faultRight: Int

@@ -19,7 +19,7 @@ struct Home: View {
                     } label: {
                         Text("Manual HTTP")
                     }
-                    .disabled(!viewModel.platformReachableHTTP)
+//                    .disabled(!viewModel.platformReachableHTTP)
                     
                     NavigationLink {
                         ManualSteering().environmentObject(viewModel)
@@ -32,7 +32,7 @@ struct Home: View {
                     } label: {
                         Text("Automatic HTTP")
                     }
-                    .disabled(!viewModel.platformReachableHTTP)
+//                    .disabled(!viewModel.platformReachableHTTP)
                 }
                 
                 Section("Platform Status") {

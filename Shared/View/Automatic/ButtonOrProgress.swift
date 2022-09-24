@@ -27,7 +27,7 @@ struct ButtonOrProgress: View {
             }.fullScreenCover(isPresented: $showProgramModification, onDismiss: {
                 // TODO: Convert program to JSON
             }) {
-                AutoProgramModification(showFlag: $showProgramModification)
+                AutoProgramModification(showFlag: $showProgramModification, highLevelInstructions: viewModel.highLevelInstructions)
             }.disabled(viewModel.automaticProgramRunning != nil)
         } else {
             Button {
