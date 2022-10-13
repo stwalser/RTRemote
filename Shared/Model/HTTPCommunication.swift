@@ -8,7 +8,7 @@
 import Foundation
 
 struct HTTPCommunication {
-    private let platformHostname = "10.0.0.17:8080"
+    private let platformHostname = "ubuntu.local:8080"
     private let jsonEncoder = JSONEncoder()
     private let jsonDecoder = JSONDecoder()
     
@@ -40,11 +40,11 @@ struct HTTPCommunication {
         return request
     }
     
-    func requestJSON(to url: URL, _ value: String) -> URLRequest {
+    func requestJSON(to url: URL, _ value: Data) -> URLRequest {
         var request = URLRequest(url: url)
         
         request.httpMethod = "PUT"
-        request.httpBody = value.data(using: .utf8)
+        request.httpBody = value
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         request.setValue("\(value.count)", forHTTPHeaderField: "Content-Length")
         

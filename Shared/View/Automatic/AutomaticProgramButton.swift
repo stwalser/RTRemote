@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AutomaticProgramButton: View {
     let program: AutomaticProgram
-    let buttonColor: Color
     
     @EnvironmentObject var viewModel: ViewModel
     
@@ -21,7 +20,6 @@ struct AutomaticProgramButton: View {
                 viewModel.connectToPlatformAutomatic()
             } label: {
                 RoundedRectangle(cornerSize: .init(width: 20, height: 20))
-                    .foregroundColor(buttonColor)
                     .opacity(getOpacity())
             }.disabled(checkIfDisabled())
                 
@@ -53,7 +51,7 @@ struct AutomaticProgramButton: View {
     
     func getOpacity() -> Double {
         if viewModel.automaticProgramRunning != nil {
-            return 0.4
+            return 0.5
         } else {
             return 1.0
         }

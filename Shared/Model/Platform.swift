@@ -22,9 +22,12 @@ enum MotorSide: Int, Codable {
 }
 
 /// The direction the motor should turn in
-enum MotorDirection: Int, Codable {
-    case forward
-    case backward
+enum MotorDirection: String, Codable, CaseIterable, Identifiable {
+    var id: MotorDirection {
+        self
+    }
+    case forward = "Vorwärts"
+    case backward = "Rückwärts"
 }
 
 /// A struct representing a manual driving instruction

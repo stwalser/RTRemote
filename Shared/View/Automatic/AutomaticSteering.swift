@@ -9,7 +9,9 @@ import SwiftUI
 
 struct AutomaticSteering: View {
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: Int(UIScreen.main.bounds.width) / 160)
-
+    
+    @State var showRenameAlert = false
+    @State var newProgramName = ""
     @EnvironmentObject var viewModel: ViewModel
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -19,55 +21,52 @@ struct AutomaticSteering: View {
         ScrollView {
             LazyVGrid(columns: columns) {
                 ForEach(automaticPrograms) {program in
-                    AutomaticProgramButton(program: program, buttonColor: .red).environmentObject(viewModel)
+                    AutomaticProgramButton(program: program).environmentObject(viewModel)
                         .contextMenu {
                             Button {
                                 deleteAutomaticProgram(program)
                             } label: {
                                 Label("Löschen", systemImage: "trash")
                             }
-
                         }
                 }
             }
-            
         }.padding()
-            .navigationTitle("Automatisch HTTP")
+            .navigationTitle("Automatic HTTP")
             .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            viewModel.platformModeLocal = .HTTPAutomatic
-        }
-        .onDisappear {
-            viewModel.platformModeLocal = .None
-        }
-        .toolbar {
-            Button {
-                addNewAutomaticProgram()
-            } label: {
-                Image(systemName: "plus")
+            .onAppear {
+                viewModel.platformModeLocal = .HTTPAutomatic
             }
-
-        }
+            .onDisappear {
+                viewModel.platformModeLocal = .None
+            }
+            .toolbar {
+                Button {
+                    addNewAutomaticProgram()
+                } label: {
+                    Image(systemName: "plus")
+                }
+                
+            }
     }
     
     func addNewAutomaticProgram() {
         let program = AutomaticProgram(context: managedObjectContext)
         program.name = "Program"
         program.creationDate = .now
-        program.stringContent = "Test"
+        program.content = Data()
         program.id = UUID()
         PersistenceController.shared.save()
     }
     
+    func renameAutomaticProgram(_ program: AutomaticProgram) {
+        managedObjectContext.perform {
+            program.name = newProgramName
+        }
+    }
+    
     func deleteAutomaticProgram(_ program: AutomaticProgram) {
-        print(program)
         managedObjectContext.delete(program)
         PersistenceController.shared.save()
-    }
-}
-
-struct AutomaticSteering_Previews: PreviewProvider {
-    static var previews: some View {
-        AutomaticSteering().environmentObject(ViewModel())
     }
 }

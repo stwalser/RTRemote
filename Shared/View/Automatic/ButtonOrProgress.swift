@@ -10,6 +10,15 @@ import SwiftUI
 struct ButtonOrProgress: View {
     @State var showProgramModification = false
     @EnvironmentObject var viewModel: ViewModel
+    @State var highLevelInstructions: [HighLevelInstruction]
+    @State var programName: String
+    
+    init(showProgramModification: Bool = false, program: AutomaticProgram) {
+        self.showProgramModification = showProgramModification
+        self.program = program
+        self.highLevelInstructions = getInstructions(from: program.content)
+        self.programName = program.name ?? ""
+    }
     
     let buttonSize: CGFloat = 22.0
     let program: AutomaticProgram
@@ -25,9 +34,11 @@ struct ButtonOrProgress: View {
                     .foregroundColor(.white)
                     .padding(10)
             }.fullScreenCover(isPresented: $showProgramModification, onDismiss: {
-                // TODO: Convert program to JSON
+                print(highLevelInstructions)
+                program.content = getData(from: highLevelInstructions)
+                program.name = programName
             }) {
-                AutoProgramModification(showFlag: $showProgramModification, highLevelInstructions: viewModel.highLevelInstructions)
+                AutoProgramModification(values: $highLevelInstructions, showFlag: $showProgramModification, name: $programName)
             }.disabled(viewModel.automaticProgramRunning != nil)
         } else {
             Button {
@@ -55,5 +66,22 @@ struct ButtonOrProgress: View {
             }.frame(width: buttonSize, height: buttonSize)
             .padding(10)
         }
+    }
+}
+
+func getInstructions(from d: Data?) -> [HighLevelInstruction] {
+    do {
+        return try JSONDecoder().decode([HighLevelInstruction].self, from: d ?? Data())
+    } catch {
+        return [HighLevelInstruction]()
+    }
+    
+}
+
+func getData(from a: [HighLevelInstruction]) -> Data {
+    do {
+        return try JSONEncoder().encode(a)
+    } catch {
+        return Data()
     }
 }
